@@ -15,7 +15,7 @@ spec:
     spec:
        containers:
          - name: gitops-app
-           image: ssm0712/gitops-full-project-practice:b618cb67613bf38420c59b14636f8167bc3ec83e
+           image: ssm0712/gitops-full-project-practice:a94d5482f882a3d1cea6aaa2024bf686da90f0ce
            ports:
            - containerPort: 3000
            resources:
