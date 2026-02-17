@@ -10,6 +10,8 @@ jobs:
     steps:
     - name: Checkout code
       uses: actions/checkout@v3
+      with: 
+        persist-credentials: false
 
     - name: Build Docker Image
       run: |
@@ -33,4 +35,4 @@ jobs:
         sed -i "s|image: .*|image: ssm0712/gitops-full-project-practice:${{ github.sha }}|" kubernetes/deployment.yaml
         git add kubernetes/deployment.yaml
         git commit -m "Update image to ${{ github.sha }}" || echo "No changes to commit"
-        git push https://x-access-token:${{ secrets.GH_PAT }}@github.com/sukhdeep07civil/gitops-full-project-practice.git HEAD:main
+        git push https://x-access-token:${{ secrets.GH_PAT }}@github.com/sukhdeep07civil/gitops-full-project-practice.git main
