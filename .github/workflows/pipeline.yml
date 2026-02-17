@@ -1,0 +1,17 @@
+name: Gitops Full Practice
+
+on:
+  push:
+    branches: [ "main" ]
+
+jobs:
+  build-test-deploy:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: Build Docker Image
+      run: |
+        docker build ssm0712/gitops-full-project-practice:${{ github.sha }}
+        docker build ssm0712/gitops-full-project-practice:latest
