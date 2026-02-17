@@ -28,8 +28,15 @@ jobs:
       run: |
         git config user.name "github-actions"
         git config user.email "github@gmail.com"
-        git pull --rebase origin main
+         
+        git fetch origin main
+        git reset --hard origin/main
+
         sed -i "s|image: .*|image: ssm0712/gitops-full-project-practice:${{ github.sha }}|" kubernetes/deployment.yaml  
+        if ! git diff --quiet; then
         git add kubernetes/deployment.yaml
         git commit -m "Update image to ${{ github.sha }}"
-        git push https://x-access-token:${{ secrets.GH_PAT }}@github.com/sukhdeep07civil/gitops-full-project-practice.git HEAD:main    
+        git push https://x-access-token:${{ secrets.GH_PAT }}@github.com/sukhdeep07civil/gitops-full-project-practice.git HEAD:main
+        else
+        echo "No changes to push."
+        fi
